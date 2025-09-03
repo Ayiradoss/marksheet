@@ -1,0 +1,83 @@
+
+@page {
+  size: A4;
+  margin: 20mm; 
+}
+@media print {
+     body {
+    margin: 0;
+    padding: 0;
+  }
+}
+.header {
+    max-width: 70%;
+    margin: 10mm auto;                
+    background: rgb(214, 238, 237);               
+    border: 4px solid #000000;
+    outline: 2px solid #000000;  
+    outline-offset: -14px;       
+    padding: 12mm 10mm;              
+    border-radius: 0; 
+    box-shadow: inset 0 0 0 2px #000000;                                     
+    position: relative;
+}
+
+
+.uni{
+    height: 500%;
+    max-height: 50%;
+    margin-top: -25%;
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+}
+.uni h2{
+    margin: 0;
+    font-size: 24px; letter-spacing:.0px; color:#0f355f;
+    text-transform: uppercase;
+}
+.uni h1{
+    font-size: 25px;
+}
+
+.logo{
+    margin-top: 3%;
+}
+
+.photo{
+    margin-left: 83%;
+    margin-top : -35%; 
+}
+
+.tab{
+    margin-top: 8%;
+}
+
+table{
+    border-collapse: collapse;
+    width: 99%;
+}
+
+.signed{
+    text-align: right;
+    margin-right: 1%;
+    margin-top: 2%;
+}
+.mysign{
+    text-align: left;
+    margin-right: 1%;
+    margin-top: 5px;
+}
+.signed h5{
+    margin-right: 6%;
+}
+
+.mysign{
+    text-align: left;
+    margin-top: -4%;
+}
+
+.sno{
+    position: relative;
+    bottom: 96px;
+}

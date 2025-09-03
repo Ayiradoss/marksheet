@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Job Application Form</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --accent: #0f355f;
+      --muted: #6b7280;
+      --error: #dc2626;
+      --success: #16a34a;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #eef3f8 0%, var(--bg) 100%);
+      padding: 28px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .container {
+      width: 920px;
+      max-width: 100%;
+      background: var(--card);
+      border-radius: 8px;
+      box-shadow: 0 8px 26px rgba(18, 38, 63, 0.08);
+      padding: 22px;
+      margin: 12px;
+    }
+
+    header.form-head {
+      display:flex;
+      align-items:center;
+      gap:16px;
+      margin-bottom: 14px;
+    }
+    header.form-head .logo {
+      width:64px; height:64px;
+      background: linear-gradient(135deg,#43e97b,#38f9d7);
+      border-radius: 8px;
+      display:flex; align-items:center; justify-content:center;
+      color: #fff; font-weight:700;
+    }
+    header.form-head h1 {
+      margin:0; font-size:20px; color:var(--accent);
+    }
+    header.form-head p {
+      margin:0; color:var(--muted); font-size:13px;
+    }
+
+    form.grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .full { grid-column: 1 / -1; } /* full-width row */
+
+    label {
+      display:block;
+      font-weight:600;
+      font-size:13px;
+      margin-bottom:6px;
+      color:#253046;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    input[type="date"],
+    select,
+    textarea {
+      width:100%;
+      padding: 10px 12px;
+      border-radius:6px;
+      border:1px solid #cfd8e3;
+      background: #fff;
+      outline: none;
+      font-size:14px;
+      transition: border-color .15s, box-shadow .15s;
+    }
+
+    textarea { min-height:110px; resize:vertical; }
+
+    /* validation styling */
+    input:focus, select:focus, textarea:focus {
+      border-color: #8aa4c7;
+      box-shadow: 0 0 0 3px rgba(14, 72, 157, 0.06);
+    }
+
+    /* valid / invalid border colors */
+    input:invalid, select:invalid, textarea:invalid {
+      border-color: var(--error);
+    }
+    input:valid, select:valid, textarea:valid {
+      border-color: var(--success);
+    }
+
+    /* error hint appears when the input is invalid
+       Note: This shows immediately if the field is empty and required.
+       Browsers will also show their own tooltip messages on submit. */
+    .hint {
+      display:none;
+      margin-top:6px;
+      font-size:12px;
+      color:var(--error);
+    }
+    /* show hint if the previous input/select/textarea is invalid */
+    input:invalid + .hint,
+    select:invalid + .hint,
+    textarea:invalid + .hint {
+      display:block;
+    }
+
+    /* file input & small helper */
+    .file-row { display:flex; gap:12px; align-items:center; }
+    .file-note { font-size:12px; color:var(--muted); }
+
+    .actions {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      margin-top: 16px;
+      grid-column: 1 / -1;
+    }
+
+    .btn {
+      padding:10px 14px;
+      font-weight:700;
+      border-radius:6px;
+      border:0;
+      cursor:pointer;
+    }
+    .btn-primary { background:var(--accent); color:#fff; }
+    .btn-ghost { background:transparent; border:1px solid #d0d7e4; color:#253046; }
+
+    /* responsive */
+    @media (max-width:800px) {
+      form.grid { grid-template-columns: 1fr; }
+      .actions { flex-direction:column-reverse; align-items:stretch; }
+    }
+
+    /* small optional printed-friendly tweaks */
+    @media print {
+      body { background:#fff; padding:0; }
+      .container { box-shadow:none; border: 4px double #000; width: auto; margin: 0; }
+      .actions, input[type="file"] { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="form-head">
+      <div class="logo">HR</div>
+      <div>
+        <h1>Job Application Form</h1>
+        <p>Position applied and personal details — please fill required fields</p>
+      </div>
+    </header>
+
+    <form class="grid" method="post" action="#" novalidate>
+      <!-- Personal -->
+      <div class="full">
+        <label for="position">Position Applying For *</label>
+        <select id="position" name="position" required>
+          <option value="">-- Select position --</option>
+          <option>Software Engineer</option>
+          <option>Frontend Developer</option>
+          <option>Backend Developer</option>
+          <option>QA Engineer</option>
+          <option>UI/UX Designer</option>
+        </select>
+        <div class="hint">Please choose a position.</div>
+      </div>
+
+      <div>
+        <label for="fullname">Full Name *</label>
+        <input id="fullname" name="fullname" type="text" required minlength="3" placeholder="e.g. Ayira Doss">
+        <div class="hint">Name must be at least 3 characters.</div>
+      </div>
+
+      <div>
+        <label for="email">Email Address *</label>
+        <input id="email" name="email" type="email" required placeholder="name@example.com">
+        <div class="hint">Enter a valid email (e.g. name@example.com).</div>
+      </div>
+
+      <div>
+        <label for="phone">Phone *</label>
+        <input id="phone" name="phone" type="tel" required pattern="[0-9]{10}" placeholder="10-digit mobile">
+        <div class="hint">Enter 10 digits (numbers only).</div>
+      </div>
+
+      <div>
+        <label for="startDate">Available From *</label>
+        <input id="startDate" name="startDate" type="date" required>
+        <div class="hint">Select an available start date.</div>
+      </div>
+
+      <div>
+        <label for="exp">Total Experience (years) *</label>
+        <input id="exp" name="experience" type="number" required min="0" max="50" placeholder="e.g. 2">
+        <div class="hint">Enter a valid number (0 - 50).</div>
+      </div>
+
+      <div>
+        <label for="salary">Expected Salary (₹) *</label>
+        <input id="salary" name="salary" type="number" required min="0" step="100" placeholder="e.g. 30000">
+        <div class="hint">Enter expected salary (number).</div>
+      </div>
+
+      <div>
+        <label for="education">Highest Qualification *</label>
+        <select id="education" name="education" required>
+          <option value="">-- Select --</option>
+          <option>High School</option>
+          <option>Diploma</option>
+          <option>Bachelor's</option>
+          <option>Master's</option>
+          <option>PhD</option>
+        </select>
+        <div class="hint">Please choose your qualification.</div>
+      </div>
+
+      <div class="full">
+        <label for="cover">Short Cover Letter / Profile *</label>
+        <textarea id="cover" name="cover" required minlength="20" placeholder="Briefly explain why you're a fit..."></textarea>
+        <div class="hint">Write at least 20 characters summarizing your profile.</div>
+      </div>
+
+      <div>
+        <label for="resume">Upload Resume (PDF / DOC) *</label>
+        <input id="resume" name="resume" type="file" accept=".pdf,.doc,.docx" required>
+        <div class="file-note">Accepted: .pdf, .doc, .docx (max size depends on server)</div>
+        <div class="hint">Please attach your resume.</div>
+      </div>
+
+      <div>
+        <label for="portfolio">Portfolio / GitHub (optional)</label>
+        <input id="portfolio" name="portfolio" type="text" placeholder="https://github.com/yourname">
+      </div>
+
+      <div class="full" style="display:flex; gap:12px; align-items:center;">
+        <input id="agree" name="agree" type="checkbox" required style="width:16px; height:16px;">
+        <label for="agree" style="margin:0; font-weight:500;">I declare the information given is true * (required)</label>
+        <div class="hint" style="margin-left:auto;">You must agree to submit.</div>
+      </div>
+
+      <div class="actions">
+        <div style="display:flex; gap:8px;">
+          <button type="reset" class="btn btn-ghost">Reset</button>
+          <button type="submit" class="btn btn-primary">Submit Application</button>
+        </div>
+        <div style="color:var(--muted); font-size:13px;">Fields marked * are required</div>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
