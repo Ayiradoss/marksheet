@@ -1,0 +1,217 @@
+<!Doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Formal Job Application</title>
+  <style>
+    body {
+      margin:0;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      background:#f2f6fa;
+      display:flex;
+      justify-content:center;
+      padding:25px;
+    }
+    .form-box {
+      background:#fff;
+      border-radius:10px;
+      padding:25px 35px;
+      width:100%;
+      max-width:850px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    }
+    h2 {
+      margin-top:0;
+      text-align:center;
+      color:#222;
+    }
+    form {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px 25px;
+    }
+    label {
+      display:block;
+      font-size:14px;
+      margin-bottom:6px;
+      font-weight:bold;
+    }
+    input, select, textarea {
+      width:100%;
+      padding:10px;
+      border:1px solid #ccc;
+      border-radius:6px;
+      font-size:14px;
+    }
+    textarea { 
+        resize:vertical; 
+    }
+    .full { 
+        grid-column:1/3; 
+    }
+    .actions { 
+        grid-column:1/3; text-align:center; margin-top:10px; 
+    }
+    button {
+      background:#007bff;
+      border:none;
+      padding:10px 20px;
+      color:#fff;
+      border-radius:6px;
+      cursor:pointer;
+      font-size:15px;
+      margin:0 6px;
+    }
+    button.reset { 
+        background:#6c757d; }
+    .error { 
+        border-color:red; 
+    }
+
+    .gender-group {
+      display: flex;
+      align-items:center;
+      gap: 75px;
+      padding:8px 0;
+    }
+    .gender-group label {
+      font-weight:normal;
+      margin-bottom:0;
+    }
+    @media(max-width:700px) {
+      form { grid-template-columns:1fr; }
+      .full { grid-column:1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-box">
+    <h2>Job Application Form</h2>
+    <form id="jobForm" novalidate>
+      <div>
+        <label for="name">Full Name *</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+        <div class="err-msg" id="err-name" ></div>
+      </div>
+      <div>
+        <label for="education">Education *</label>
+        <input type="text" id="education" placeholder="Enter your Education" required>
+        <div class="err-msg" id="err-education"></div>
+      </div>
+      <div>
+        <label for="dob">Date of Birth *</label>
+        <input type="date" id="dob" placeholder="Enter your date of Birth" required>
+        <div class="err-msg" id="err-dob"></div>
+      </div>
+      <div>
+        <label>Gender *</label>
+        <div class="gender-group">
+          <label><input type="radio" name="gender" value="Male" required> Male</label>
+          <label><input type="radio" name="gender" value="Female" required> Female</label>
+          <label><input type="radio" name="gender" value="Other" required> Other</label>
+        </div>
+        <div class="err-msg" id="err-gender"></div>
+      </div>
+      <div>
+        <label for="email">Email *</label>
+        <input type="email" id="email" placeholder="Enter your Email" required>
+        <div class="err-msg" id="err-email"></div>
+      </div>
+      <div>
+        <label for="mobile">Mobile No *</label>
+        <input type="number" id="mobile"  placeholder="10 digits" required>
+        <div class="err-msg" id="err-mobile"></div>
+      </div>
+
+      <div class="full">
+        <label for="line1">Current Address *</label>
+        <input type="text" id="line1" required>
+        <div class="err-msg" id="err-line1"></div>
+      </div>
+
+      <div class="full">
+        <label for="line2">Permenant Address *</label>
+        <input type="text" id="line2" required>
+      </div>
+
+      <div>
+        <label for="state">State *</label>
+        <input type="text" id="state" required>
+        <div class="err-msg" id="err-state"></div>
+      </div>
+
+      <div>
+        <label for="district">District *</label>
+        <input type="text" id="district" required>
+        <div class="err-msg" id="err-district"></div>
+      </div>
+
+
+      <div>
+        <label for="position">Position *</label>
+        <select id="position" required>
+          <option value="">-- Select --</option>
+          <option>Frontend Developer</option>
+          <option>Backend Developer</option>
+          <option>Tester</option>
+          <option>SQL Developer</option>
+        </select>
+        <div class="err-msg" id="err-position"></div>
+      </div>
+
+      <div>
+        <label for="resume">Upload Resume *</label>
+        <input type="file" id="resume" accept=".pdf,.doc,.docx" required>
+        <div class="err-msg" id="err-resume"></div>
+      </div>
+      
+      <div class="actions">
+        <button type="button" class="reset" id="resetBtn">Reset</button>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+<script>
+  const form = document.getElementById('jobForm');
+  const fields = ["name","education","dob","email","mobile","father","mother","line1","state","district","city","position","resume","photo"];
+  
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    let ok = true;
+
+    document.querySelectorAll('.err-msg').forEach(el=>el.textContent="");
+    document.querySelectorAll('input,select').forEach(el=>el.classList.remove("error"));
+
+    fields.forEach(f => {
+      const input = document.getElementById(f);
+      const err = document.getElementById("err-"+f);
+      if(!input.value){
+        input.classList.add("error");
+        err.textContent = "This field is required.";
+        ok = false;
+      } else if(f==="mobile" && !/^\d{10}$/.test(input.value)){
+        input.classList.add("error");
+        err.textContent = "Enter valid 10-digit number.";
+        ok = false;
+      }
+    });
+
+    const genderSelected = document.querySelector('input[name="gender"]:checked');
+    if(!genderSelected){
+      document.getElementById("err-gender").textContent="Please select gender.";
+      ok=false;
+    }
+
+    if(ok) alert("Form submitted successfully!");
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    form.reset();
+    document.querySelectorAll('.err-msg').forEach(el=>el.textContent="");
+    document.querySelectorAll('input,select').forEach(el=>el.classList.remove("error"));
+  });
+</script>
+</body>
+</html>
